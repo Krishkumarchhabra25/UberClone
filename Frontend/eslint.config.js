@@ -33,6 +33,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/no-unescaped-entities': 'off', // Rule disabled to allow unescaped characters
     },
   },
 ]

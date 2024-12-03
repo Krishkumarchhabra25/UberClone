@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CaptainLogin = () => {
@@ -12,7 +12,7 @@ const CaptainLogin = () => {
           password
         })
 
-        console.log(captain)
+        console.log(captainData)
     }
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
