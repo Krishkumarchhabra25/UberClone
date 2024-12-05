@@ -1,5 +1,7 @@
-import  { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import  { useContext, useState } from 'react'
+import { Link,  useNavigate } from 'react-router-dom'
+import {CaptainDataContext}  from "../context/captainContext"
 
 const CaptainSignup = () => {
     const [ email, setEmail ] = useState('')
@@ -11,12 +13,59 @@ const CaptainSignup = () => {
     const [ vehiclePlate, setVehiclePlate ] = useState('')
     const [ vehicleCapacity, setVehicleCapacity ] = useState('')
     const [ vehicleType, setVehicleType ] = useState('')
+
+
+    const {captain , setCaptain}= useContext(CaptainDataContext);
+   const navigate = useNavigate()
+
+   const submitHandler = async (e) => {
+    e.preventDefault();
+    const captainData = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
+      },
+      email: email,
+      password: password,
+      vechile: {
+        color: vehicleColor,
+        plate: vehiclePlate,
+        capacity: vehicleCapacity,
+        vechileType: vehicleType,
+      },
+    };
+  
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, captainData);
+  
+      if (response.status === 201) {
+        const data = response.data;
+        setCaptain(data.captain);
+        localStorage.setItem('token', data.token);
+        navigate('/captain-home'); // Navigate after successful registration
+      }
+    } catch (error) {
+      console.error("Error registering captain:", error);
+      // Optionally, show an error message to the user
+    }
+  
+    // Clear input fields
+    setEmail('');
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+    setVehicleCapacity('');
+    setVehicleColor('');
+    setVehiclePlate('');
+    setVehicleType('');
+  };
+  
   return (
     <div className='py-5 px-5 h-screen flex flex-col justify-between'>
     <div>
       <img className='w-20 mb-3' src="https://pngimg.com/d/uber_PNG24.png" alt="" />
 
-      <form >
+      <form onSubmit={submitHandler} >
 
         <h3 className='text-lg w-full  font-medium mb-2'>What's our Captain's name</h3>
         <div className='flex gap-4 mb-7'>
