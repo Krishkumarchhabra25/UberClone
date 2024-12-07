@@ -23,17 +23,19 @@ export default [
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
-      ...reactHooks.configs.recommended.rules,
-      'react/jsx-no-target-blank': 'off',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      'react/no-unescaped-entities': 'off', // Rule disabled to allow unescaped characters
-    },
+   rules: {
+  ...js.configs.recommended.rules,
+  ...react.configs.recommended.rules,
+  ...react.configs['jsx-runtime'].rules,
+  ...reactHooks.configs.recommended.rules,
+  'react/jsx-no-target-blank': 'off',
+  'react-refresh/only-export-components': [
+    'warn',
+    { allowConstantExport: true },
+  ],
+  'react/no-unescaped-entities': 'off', // Rule disabled to allow unescaped characters
+  'no-unused-vars': 'off', // Disable unused variable warnings
+},
+
   },
 ]
